@@ -35,19 +35,20 @@ end
 # Fill out routes below!
 
 get '/articles' do
-  @articles = []
+  @articles = Article.all
 
   erb :index
 end
 
-get '/artices/:id' do
-  @article
+get '/articles/:id' do
+  @article = Article.find(params["id"])
 
   erb :show
 end
 
 
 post "/articles" do
-  
+  Article.create(params)
+
   redirect '/articles'
 end
