@@ -24,4 +24,30 @@ def db_connection
   end
 end
 
-# Put your News Aggregator server.rb route code here
+get '/' do
+  redirect '/articles'
+end
+
+get '/articles/new' do
+  erb :new
+end
+
+# Fill out routes below!
+
+get '/articles' do
+  @articles = []
+
+  erb :index
+end
+
+get '/artices/:id' do
+  @article
+
+  erb :show
+end
+
+
+post "/articles" do
+  
+  redirect '/articles'
+end
