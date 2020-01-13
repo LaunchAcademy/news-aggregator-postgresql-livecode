@@ -35,19 +35,46 @@ end
 # Fill out routes below!
 
 get '/articles' do
-  @articles = []
+  @articles = Article.all
 
+  # @articles = []
+  # result = db_connection do |conn|
+  #   conn.exec("SELECT title, description, url FROM articles;")
+  # end
+  #
+  # result.each do |article_data|
+  #   @articles << Article.new(
+  #     article_data["title"],
+  #     article_data["description"],
+  #     article_data["url"]
+  #   )
+  # end
   erb :index
 end
 
-get '/artices/:id' do
-  @article
+post "/articles/new" do
+  # title = params["title"]
+  # description = params["description"]
+  # url = params["url"]
+  Article.create(params)
 
-  erb :show
+  # db_connection do |conn|
+  #   conn.exec_params("INSERT INTO articles(title, description, url) VALUES ($1, $2, $3)", [title, description, url])
+  # end
+  #
+  redirect '/articles'
 end
 
+get '/articles/:id' do
+  @article = Article.find(params["id"])
 
-post "/articles" do
-  
-  redirect '/articles'
+  # result = db_connection do |conn|
+  #   conn.exec("SELECT * FROM articles WHERE id=#{params["id"]}")
+  # end
+  # @article = Article.new(
+  #   result.to_a[0]["title"],
+  #   result.to_a[0]["description"],
+  #   result.to_a[0]["url"]
+  # )
+  erb :show
 end

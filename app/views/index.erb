@@ -3,9 +3,8 @@
 <% if @articles != [] %>
   <ul>
     <% @articles.each do |article| %>
-      <li> <%= article["title"] %>:
-        <\br>
-        <p> <%= article["description"] %> </p>
+      <li> <%= article.title %>:
+         <%= article.description %> 
       </li>
     <% end %>
   </ul>
