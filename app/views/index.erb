@@ -1,8 +1,13 @@
 <h1>Articles Index Page</h1>
 
-<% @articles.each do |article| %>
-  <li>
-    <strong> <%= article.title %> </strong>
-    <p><%= article.description %></p>
-  </li>
+<% if @articles != [] %>
+  <% @articles.each do |article| %>
+    <li>
+      <strong> <%= article.title %> </strong>
+      <p><%= article.description %></p>
+    </li>
+  <% end %>
+
+<% else %>
+  <p>(crickets)</p>
 <% end %>
