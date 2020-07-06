@@ -32,22 +32,29 @@ get '/articles/new' do
   erb :new
 end
 
-# Fill out routes below!
-
 get '/articles' do
-  @articles = []
+  # run a sql query for all records
+  @articles = Article.all
+  
 
   erb :index
 end
 
-get '/artices/:id' do
-  @article
+get '/articles/:id' do
+  id = params[:id]
+
+  @article = Article.find(id)
 
   erb :show
 end
 
-
 post "/articles" do
-  
+  title = params[:title]
+  description = params[:description]
+  url = params[:url]
+
+  Article.create(title, description, url)
+
   redirect '/articles'
 end
+

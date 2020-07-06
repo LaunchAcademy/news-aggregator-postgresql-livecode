@@ -1,14 +1,9 @@
 <h1> All My Articles </h1>
 
-<% if @articles != [] %>
   <ul>
     <% @articles.each do |article| %>
-      <li> <%= article["title"] %>:
-        <\br>
-        <p> <%= article["description"] %> </p>
+      <li> 
+        <%= article.title %>
       </li>
     <% end %>
   </ul>
-<% else %>
-  <p>(crickets)</p>
-<% end %>
