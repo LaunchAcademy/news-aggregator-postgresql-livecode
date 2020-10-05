@@ -26,7 +26,7 @@ def db_connection
 end
 
 get "/articles" do
-  @articles = Article.all
+  # @articles = Article.all
 
   erb :index
 end
@@ -40,15 +40,13 @@ post "/articles/new" do
   # description = params["description"]
   # url = params["url"]
 
-  Article.create(params)
 
   redirect "/articles"
 end
 
-get "/articles/:id" do
-  @article = Article.find(params[:id])
-  binding.pry
+# get "/articles/:id" do
+#   @article = Article.find(params[:id])
+#   binding.pry
 
-  erb :show
-end
-# plebs call it pooteen and sophisticated canadians call it pootin
+#   erb :show
+# end

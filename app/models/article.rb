@@ -1,10 +1,34 @@
-class Article < ActiveRecord::Base
+require "pry"
 
+class Article < ActiveRecord::Base
+  attr_accessor :title, :description, :url
+
+  def initialize(title, description, url)
+    @title = title
+    @description = description
+    @url = url
+  end
 end
 
 
 
-# require "pry"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # class Article
 #   attr_accessor :title, :description, :url
 #
