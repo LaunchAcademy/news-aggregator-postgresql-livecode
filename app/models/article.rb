@@ -1,12 +1,44 @@
 require "pry"
 
-class Article < ActiveRecord::Base
+class Article 
   attr_accessor :title, :description, :url
 
-  def initialize(title, description, url)
+  def initialize(id, title, description, url)
+    @id = id
     @title = title
     @description = description
     @url = url
+  end
+
+  def self.all
+    sql_articles = db_connection do |connection_object|
+      connection_object.exec("SELECT * FROM articles;")
+    end
+
+    article_objects = []
+    sql_articles.to_a.each do |article_hash| 
+      article_objects << Article.new(article_hash["id"], article_hash["title"], article_hash["description"], article_hash["url"])
+    end
+
+    return article_objects
+  end 
+
+  def self.create(title, description, url)
+
+    result_of_create = db_connection do |connection_object|
+      connection_object.exec_params('INSERT INTO articles (title, description, url) VALUES ($1, $2, $3)', [title, description, url])
+    end
+
+  end
+
+  def self.find(id)
+     sql_article = db_connection do |connection_object|
+      connection_object.exec("SELECT * FROM articles WHERE id = #{id};")
+    end
+    
+    article_hash = sql_article[0]
+
+    return Article.new(article_hash["id"], article_hash["title"], article_hash["description"], article_hash["url"])
   end
 end
 
